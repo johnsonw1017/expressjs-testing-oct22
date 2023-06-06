@@ -1,5 +1,7 @@
 const request = require("supertest");
 
+const {app} = require("../src/server");
+
 // test suite
 describe("Has a homepage...", () => {
     
@@ -21,6 +23,42 @@ describe("Has a homepage...", () => {
         const responseBodyDataType = typeof(response.body);
         console.log(responseBodyDataType);
 
-        expect(response.body).toBe({"object"});
+        expect(responseBodyDataType).toBe("object");
     });
 });
+
+//user signup test
+describe("User...", () => {
+
+    describe("...can sign up...", () => {
+        it("...with a valid email address", async () => {
+            //expect an object on the response with user data
+            const response = await request(app)
+            .post("/users/signup")
+            .send({
+                email:"blahblah",
+                password: "blahblah"
+            })
+
+            expect(response.body).toEqual({message:"Sign up success!"});
+        });
+
+    });
+
+    describe("...can NOT sign up...", () => {
+        it("...with an invalid email address", async () => {
+            //expect one error on the response
+        });
+
+        it("...with an invalid email address",  async () => {
+            //expect one error on the response
+        });
+
+        it("...with an invalid email address", async () => {
+            //expect two error on the response
+        });
+    });
+
+
+
+})
