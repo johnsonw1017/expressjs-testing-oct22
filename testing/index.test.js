@@ -36,7 +36,7 @@ describe("User...", () => {
             const response = await request(app)
             .post("/users/signup")
             .send({
-                email:"blahblah",
+                email:"user@email.com",
                 password: "blahblah"
             })
 
@@ -48,6 +48,16 @@ describe("User...", () => {
     describe("...can NOT sign up...", () => {
         it("...with an invalid email address", async () => {
             //expect one error on the response
+
+            const response = await request(app)
+            .post("/users/signup")
+            .send({
+                email:"blahblah",
+                password: "blahblah"
+            })
+
+            expect(response.body).toEqual({message:"Sign up failure!"});
+            expect(response.statusCode).toEqual(400);
         });
 
         it("...with an invalid email address",  async () => {
