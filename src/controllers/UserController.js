@@ -32,6 +32,10 @@ router.post("/signup",
     // }
 });
 
-
+router.post("/login", bodyHasEmail, bodyHasPassword, emailIsValid, errorCheck, (request, response) => {
+    response.json({
+        message:"Login success!"
+    });
+})
 
 module.exports = router;
