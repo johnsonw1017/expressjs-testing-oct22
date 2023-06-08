@@ -5,6 +5,8 @@ const bodyHasEmail = (request, response, next) => {
         next();
     } else {
         //add error to error stack
+        request.errors.push("Body is missing email");
+        next();
     }
 
 }
@@ -13,13 +15,17 @@ const bodyHasPassword = (request, response, next) => {
         next();
     } else {
         //add error to error stack
+        request.errors.push("Body is missing password");
+        next();
     }
 }
 const emailIsValid = (request, response, next) => {
-    if(request.body.email.includes("@")){
+    if(request.body.email?.includes("@")){
         next();
     } else {
         //add error to error stack
+        request.errors.push("Email is not valid");
+        next();
     }
 }
 

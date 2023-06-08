@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const {bodyHasEmail, bodyHasPassword, emailIsValid} = require("../middleware/UserMiddleware");
+const { errorCheck } = require("../middleware/ErrorMiddleware");
 
 router.post("/signup", 
     //check for email
@@ -10,6 +11,8 @@ router.post("/signup",
     emailIsValid,
     //check for password
     bodyHasPassword,
+    //If errors exist, respond with errors;
+    errorCheck,
     
     (request, response) => {
         
@@ -28,5 +31,7 @@ router.post("/signup",
     //     response.status(400).json({message:"Sign up failure!"});
     // }
 });
+
+
 
 module.exports = router;
