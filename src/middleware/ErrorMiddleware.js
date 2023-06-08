@@ -4,8 +4,8 @@ const errorCheck = (request, response, next) => {
 
     // if error detected, send errors to user
     if (request.errors.length > 0) {
-        response.json({
-            errors:request.errors
+        response.status(400).json({
+            errors: request.errors
         });
     } else {
 
